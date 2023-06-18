@@ -1,5 +1,8 @@
 package scenes;
 
+/**
+    Default h2d.Scene for background. TODO: refactor.
+**/
 class Background extends h2d.Scene {
     var bounds : h2d.col.Bounds;
     

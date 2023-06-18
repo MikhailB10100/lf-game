@@ -1,9 +1,26 @@
 package entities.hero;
 
+/**
+    Class that represents hero.
+**/
 class Hero extends h2d.Object {
     var bounds : h2d.col.Bounds;
-    public var animations : HeroAnimations;
-    final GRAVITY : Float = 50;
+    /**
+        Controller for hero's animation.
+    **/
+    public final ANIMATIONS: HeroAnimationsController;
+    /**
+        Force of gravity.
+    **/
+    public final GRAVITY = 50;
+    /**
+        Initial move speed.
+    **/
+    public final INITIAL_MOVE_SPEED = 500;
+    /**
+        Initial vertical velocity.
+    **/
+    public final INITIAL_VERTICAL_VELOCITY = -15;
 
     var verticalVelocity : Float = 0;
     var horizontalVelocity : Float = 0;
@@ -17,22 +34,27 @@ class Hero extends h2d.Object {
         bounds.y = 0;
         bounds.x = 0;
         
-        this.animations = new HeroAnimations(this);
+        this.ANIMATIONS = new HeroAnimationsController(this);
         // bounds.width = anim.frames[Math.floor(anim.currentFrame)].width;
         // bounds.height = anim.frames[Math.floor(anim.currentFrame)].height;
     }
 
+    /**
+		Update hero.
+		Called each frame right before rendering.
+		@param dt Time elapsed since last frame, normalized.
+		@param keys Pressed keys. [TODO: refactor].
+		@param bottomBound Current scene bottom bound. [TODO: refactor].
+	**/
     public function update(dt: Float, keys: { left : Bool, right : Bool, jump : Bool }, bottomBound: Float) {
-        
-        
         if ((keys.left && keys.right) || (!keys.left && !keys.right)) {
             horizontalVelocity = 0;
             if (verticalVelocity == 0) {
-                animations.play(HeroAnimations.HeroAnimation.IDLE);
+                ANIMATIONS.play(HeroAnimationsController.HeroAnimation.IDLE);
             }
         } else {
             if (verticalVelocity == 0) {
-                animations.play(HeroAnimations.HeroAnimation.RUNNING);
+                ANIMATIONS.play(HeroAnimationsController.HeroAnimation.RUNNING);
             }
             if (keys.left) {
                 horizontalMoveKeyHandler(this.scaleX == 1, dt);
@@ -42,7 +64,7 @@ class Hero extends h2d.Object {
         }
 
         if (keys.jump && verticalVelocity == 0) {
-            verticalVelocity = -15;
+            verticalVelocity = INITIAL_VERTICAL_VELOCITY;
         }
 
         this.y = Math.min(this.y + verticalVelocity * GRAVITY * dt, bottomBound);
@@ -52,9 +74,9 @@ class Hero extends h2d.Object {
         } else {
             verticalVelocity += GRAVITY * dt;
             if (horizontalVelocity == 0) {
-
+                //
             } else {
-                animations.play(HeroAnimations.HeroAnimation.JUMP);
+                ANIMATIONS.play(HeroAnimationsController.HeroAnimation.JUMP);
             }
         }
 
@@ -66,6 +88,6 @@ class Hero extends h2d.Object {
             this.scaleX *= -1;
             horizontalVelocityMultiplier = this.scaleX;
         }
-        if (horizontalVelocity == 0) horizontalVelocity = 500;
+        if (horizontalVelocity == 0) horizontalVelocity = INITIAL_MOVE_SPEED;
     }
 }

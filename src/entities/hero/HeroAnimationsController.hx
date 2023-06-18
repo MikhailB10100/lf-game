@@ -1,15 +1,27 @@
 package entities.hero;
 
 /**
-    enum of Hero animations
+    TODO: write docs.
 **/
 enum HeroAnimation {
+    /**
+        Animation of hero's idle (afk).
+    **/
     IDLE;
+    /**
+        Animation of hero's run.
+    **/
     RUNNING;
+    /**
+        Animation of hero's jump.
+    **/
     JUMP;
 }
 
-class HeroAnimations extends objects.AnimationsController<HeroAnimation> {
+/**
+    AnimationsController for Hero.
+**/
+class HeroAnimationsController extends objects.AnimationsController<HeroAnimation> {
     public function new(parent: h2d.Object) {
         super(parent);
         this.animations.set(HeroAnimation.IDLE, new objects.Animation([hxd.Res.our_game.hero1_untitled_mainview.toTile()]));

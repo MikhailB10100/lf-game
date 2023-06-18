@@ -1,3 +1,6 @@
+/**
+    Core Game class.
+**/
 class Game extends hxd.App {
     var bottomBound : Float;
     var key : { left : Bool, right : Bool, jump : Bool };

@@ -1,9 +1,21 @@
 package objects;
 
+/**
+    Class-controller for animations.
+**/
 class AnimationsController<Key: EnumValue> {
+    /**
+        Map with Animation objects for specified generic enum.
+    **/
     public final animations = new Map<Key, objects.Animation>();
+    /**
+        h2d.Anim object that adds to the parent passed to constructor.
+    **/
+    public final anim : h2d.Anim;
+    /**
+        Animation that currently plays.
+    **/
     public var currentAnimation : Key;
-    public var anim : h2d.Anim;
 
     public function new(parent: h2d.Object) {
         anim = new h2d.Anim([h2d.Tile.fromColor(0x000000)]);
@@ -11,12 +23,12 @@ class AnimationsController<Key: EnumValue> {
     }
 
     /**
-        Play animation with specified key
-        @param key key from controller generic enum
+        Play animation with specified key.
+        @param key key from controller generic enum.
     **/
     public function play(key: Key) {
         if (currentAnimation == key) return;
-        var animation: Null<Animation> = animations.get(key);
+        var animation = animations.get(key);
         if (animation == null) {
             throw "Animation not found";
         }

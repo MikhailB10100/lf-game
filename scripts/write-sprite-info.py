@@ -148,11 +148,11 @@ def write_sprite_info(input: str, output = "sprite.json", overwrite = False):
         json.dump(sprite_info, f, cls=SpriteInfoEncoder)
 
 
-def write_sprite_info_for_all_sprites(input: str, output: str, overwrite = False):
+def find_sprites_and_write_sprite_info(input: str, output: str, overwrite = False):
     for entry in os.listdir(os.path.join(input)):
         entry_path = os.path.join(input, entry)
         if os.path.isdir(entry_path):
-            write_sprite_info_for_all_sprites(entry_path, output, overwrite)
+            find_sprites_and_write_sprite_info(entry_path, output, overwrite)
         elif entry == 'sprite.png':
             write_sprite_info(entry_path, output, overwrite)
 
@@ -171,7 +171,7 @@ def main():
     if file_path.startswith("--") and os.path.isfile(file_path):
         write_sprite_info(file_path, arguments.get("output"), arguments.get("overwrite"))
     elif arguments.get("all") == True:
-        write_sprite_info_for_all_sprites(arguments.get("input"), arguments.get("output"), arguments.get("overwrite"))
+        find_sprites_and_write_sprite_info(arguments.get("input"), arguments.get("output"), arguments.get("overwrite"))
     else:
         raise Exception('Sprite path or --all argument not specified')
 

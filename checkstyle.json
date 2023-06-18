@@ -269,7 +269,7 @@
 		{
 			"type": "MemberName",
 			"props": {
-				"format": "^[a-zA-Z][a-zA-Z0-9]*$",
+				"format": "^[a-z][a-zA-Z]*$|^[A-Z][_A-Z]*$",
 				"tokens": [],
 				"ignoreExtern": true
 			}
@@ -490,7 +490,7 @@
 					"TRY",
 					"CATCH"
 				],
-				"option": "aloneorsingle"
+				"option": "same"
 			}
 		},
 		{
@@ -544,12 +544,6 @@
 			}
 		},
 		{
-			"type": "Type",
-			"props": {
-				"ignoreEnumAbstractValues": true
-			}
-		},
-		{
 			"type": "TypeDocComment",
 			"props": {
 				"tokens": [
@@ -570,10 +564,6 @@
 			}
 		},
 		{
-			"type": "UnnecessaryConstructor",
-			"props": {}
-		},
-		{
 			"type": "UnusedImport",
 			"props": {
 				"ignoreModules": [],
@@ -583,19 +573,6 @@
 		{
 			"type": "UnusedLocalVar",
 			"props": {}
-		},
-		{
-			"type": "VarTypeHint",
-			"props": {
-				"typeHintPolicy": "infer_new_or_const",
-				"ignoreEnumAbstractValues": true
-			}
-		},
-		{
-			"type": "VariableInitialisation",
-			"props": {
-				"allowFinal": true
-			}
 		},
 		{
 			"type": "WhitespaceAfter",

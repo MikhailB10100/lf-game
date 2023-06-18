@@ -1,10 +1,19 @@
 package objects;
 
+/**
+    Class-storage for h2d.Anim data. Used for AnimationsController.    
+**/
 class Animation {
-    public var frames : Array<h2d.Tile>;
-    public var speed : Float = 15;
+    /**
+        Frames of h2d.Anim.
+    **/
+    public final frames : Array<h2d.Tile>;
+    /**
+        Speed of h2d.Anim.
+    **/
+    public final speed : Float;
 
-    public function new(frames : Array<h2d.Tile>, speed : Float = 15) {
+    public function new(frames : Array<h2d.Tile>, speed : Float = utils.DefaultValues.H2D_ANIM_DEFAULT_SPEED) {
         for (frame in frames) {
             frame.dx = frame.width * -0.5;
             frame.dy = frame.height * -0.5;
@@ -13,6 +22,11 @@ class Animation {
         this.speed = speed;
     }
 
+    /**
+        Create Animation from sprite. Requires sprite.json. More info: [TODO: insert link to information].
+        @param spriteDir source directory of sprite.png and sprite.json.
+        @return Animation
+    **/
     public static function fromSprite(spriteDir: String): Animation {
         var sprite = hxd.Res.load('${spriteDir}/sprite.png').toTile();
         var spriteInfo : typing.SpriteInfo = haxe.Json.parse(sys.io.File.getContent('res/${spriteDir}/sprite.json'));
