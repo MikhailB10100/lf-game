@@ -9,10 +9,6 @@ typedef SpriteInfo = {
     **/
     path: String,
     /**
-        Animation speed.
-    **/
-    speed: Float,
-    /**
         Array of frames positions and sizes.
     **/
     frames: Array<{ x: Int, y: Int, width: Int, height: Int }>,

@@ -4,15 +4,13 @@
 class Game extends hxd.App {
     var bottomBound : Float;
     var key : { left : Bool, right : Bool, jump : Bool };
-    var pad : hxd.Pad;
+    var pad = hxd.Pad.createDummy();
 
     var background : scenes.Background;
     var hero : entities.hero.Hero;
 
     override function init() {
-        pad = hxd.Pad.createDummy();
         hxd.Pad.wait(function(p) this.pad = p);
-
         hxd.Res.initEmbed();
 
         background = new scenes.Background(s2d);

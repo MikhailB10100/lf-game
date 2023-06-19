@@ -34,6 +34,6 @@ class AnimationsController<Key: EnumValue> {
         }
         currentAnimation = key;
         anim.play(animation.frames);
-        anim.speed = animation.speed;
+        anim.speed = animation.frames.length;
     }
 }

@@ -75,9 +75,8 @@ class SpriteInfoFrame:
 class SpriteInfo:
     frames: list[SpriteInfoFrame]
 
-    def __init__(self, name, speed = 15) -> None:
+    def __init__(self, name: str) -> None:
         self.name = name
-        self.speed = speed
         self.frames = []
 
     
@@ -168,7 +167,8 @@ def main():
 
     # get file path from argv or from --input argument
     file_path = arguments.get("input") if sys.argv[1].startswith("--") else sys.argv[1]
-    if file_path.startswith("--") and os.path.isfile(file_path):
+    
+    if type(file_path) is str and os.path.isfile(file_path):
         write_sprite_info(file_path, arguments.get("output"), arguments.get("overwrite"))
     elif arguments.get("all") == True:
         find_sprites_and_write_sprite_info(arguments.get("input"), arguments.get("output"), arguments.get("overwrite"))

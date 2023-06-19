@@ -11,15 +11,12 @@ class Animation {
     /**
         Speed of h2d.Anim.
     **/
-    public final speed : Float;
-
-    public function new(frames : Array<h2d.Tile>, speed : Float = utils.DefaultValues.H2D_ANIM_DEFAULT_SPEED) {
+    public function new(frames : Array<h2d.Tile>) {
         for (frame in frames) {
             frame.dx = frame.width * -0.5;
             frame.dy = frame.height * -0.5;
         }
         this.frames = frames;
-        this.speed = speed;
     }
 
     /**
@@ -32,6 +29,6 @@ class Animation {
         var spriteInfo : typing.SpriteInfo = haxe.Json.parse(sys.io.File.getContent('res/${spriteDir}/sprite.json'));
         var tiles : Array<h2d.Tile> = [for (frame in spriteInfo.frames) sprite.sub(frame.x, frame.y, frame.width, frame.height)];
 
-        return new Animation(tiles, spriteInfo.speed);
+        return new Animation(tiles);
     }
 }
