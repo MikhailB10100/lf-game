@@ -125,7 +125,7 @@ def write_sprite_info(input: str, output = "sprite.json", overwrite = False):
     image = Image.open(input)
     sprite_info = SpriteInfo(input_path_parts[-1])
     positions = FramePositions()
-    is_last_column_transparency = False
+    is_last_column_transparency = True
     for x in range(image.width):
         column_info = ColumnInfo.get(image, x)
         if column_info.transparency:

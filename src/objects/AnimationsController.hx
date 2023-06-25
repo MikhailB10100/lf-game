@@ -26,14 +26,26 @@ class AnimationsController<Key: EnumValue> {
         Play animation with specified key.
         @param key key from controller generic enum.
     **/
-    public function play(key: Key) {
+    public function play(key: Key, ?next: Key) {
         if (currentAnimation == key) return;
         var animation = animations.get(key);
         if (animation == null) {
             throw "Animation not found";
-        }
+        } 
         currentAnimation = key;
         anim.play(animation.frames);
-        anim.speed = animation.frames.length;
+        // anim.speed = animation.frames.length;
+        // TODO: check it later.
+        anim.speed = 60;
+        if (next != null) {
+            var isNextExists = animations.exists(next);
+            if (!isNextExists) {
+                throw "Next animation not found";
+            }
+            anim.onAnimEnd = function() {
+                anim.onAnimEnd = function() {}
+                this.play(next);
+            };
+        }
     }
 }

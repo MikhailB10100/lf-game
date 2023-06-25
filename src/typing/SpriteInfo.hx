@@ -11,5 +11,5 @@ typedef SpriteInfo = {
     /**
         Array of frames positions and sizes.
     **/
-    frames: Array<{ x: Int, y: Int, width: Int, height: Int }>,
+    frames: Array<{ x: Int, y: Int, width: Int, height: Int }>
 }

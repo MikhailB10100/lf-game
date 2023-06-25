@@ -27,8 +27,7 @@ class Animation {
     public static function fromSprite(spriteDir: String): Animation {
         var sprite = hxd.Res.load('${spriteDir}/sprite.png').toTile();
         var spriteInfo : typing.SpriteInfo = haxe.Json.parse(sys.io.File.getContent('res/${spriteDir}/sprite.json'));
-        var tiles : Array<h2d.Tile> = [for (frame in spriteInfo.frames) sprite.sub(frame.x, frame.y, frame.width, frame.height)];
-
+        var tiles : Array<h2d.Tile> = [for (frame in spriteInfo.frames) sprite.sub(frame.x, frame.y, frame.width, sprite.height)];
         return new Animation(tiles);
     }
 }

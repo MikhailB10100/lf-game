@@ -13,14 +13,14 @@ class Hero extends h2d.Object {
         Force of gravity.
     **/
     public final GRAVITY = 50;
-    /**
+    /**s
         Initial move speed.
     **/
-    public final INITIAL_MOVE_SPEED = 500;
+    public final INITIAL_MOVE_SPEED = 800;
     /**
         Initial vertical velocity.
     **/
-    public final INITIAL_VERTICAL_VELOCITY = -15;
+    public final INITIAL_VERTICAL_VELOCITY = -25;
 
     var verticalVelocity : Float = 0;
     var horizontalVelocity : Float = 0;
@@ -47,9 +47,12 @@ class Hero extends h2d.Object {
 		@param bottomBound Current scene bottom bound. [TODO: refactor].
 	**/
     public function update(dt: Float, keys: { left : Bool, right : Bool, jump : Bool }, bottomBound: Float) {
+        if (!keys.left && !keys.right && horizontalVelocity != 0) {
+            ANIMATIONS.play(HeroAnimationsController.HeroAnimation.POST_RUNNING, HeroAnimationsController.HeroAnimation.IDLE);
+        }
         if ((keys.left && keys.right) || (!keys.left && !keys.right)) {
             horizontalVelocity = 0;
-            if (verticalVelocity == 0) {
+            if (verticalVelocity == 0 && horizontalVelocity == 0 && ANIMATIONS.currentAnimation != HeroAnimationsController.HeroAnimation.POST_RUNNING) {
                 ANIMATIONS.play(HeroAnimationsController.HeroAnimation.IDLE);
             }
         } else {
